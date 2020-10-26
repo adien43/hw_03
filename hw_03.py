@@ -140,13 +140,9 @@ while True:
     has_not_commented = len(not_my_comments) == len(all_comments)
     
     if has_not_commented:
-        try:
-            new_comment = generate_comment()
-            submission.reply(new_comment)
-            print("new comment")
-        except:
-            print("exception found")
-            time.sleep(5)
+        new_comment = generate_comment()
+        submission.reply(new_comment)
+        print("new comment")
         # FIXME (task 2)
         # if you have not made any comment in the thread, then post a top level comment
         #
@@ -166,7 +162,7 @@ while True:
         for comment in not_my_comments:
             isMyName = False
             for replies in comment.replies.list():
-                if replies.author.name == 'bottomsup40':
+                if replies.author == 'bottomsup40':
                     isMyName = True 
                 else:
                     pass
@@ -210,19 +206,22 @@ while True:
     # otherwise, create a subreddit instance for the csci40 subreddit,
     # use the .top() command with appropriate parameters to get the list of all submissions,
     # then use random.choice to select one of the submissions
+#extracredit
 
-r = random.random()
-print(r)
-if r < 0.5:
-    print('create a submission just like is done at the top of this page')
-    reddit_debate_url = 'https://www.reddit.com/r/csci040temp/comments/jhb20w/2020_debate_thread/'
-    submission = reddit.submission(url=reddit_debate_url)
-    print(submission.title)
-else:
-    print('create a subreddit instance for the csci40 subreddit use random.choice to select one of the submissions')
-    submission_2 = reddit.subreddit("csci040temp").random()
-    print(submission_2.title)
-    submission = submission_2
+    r = random.random()
+    print(r)
+    if r < 0.5:
+        print('original thread')
+        reddit_debate_url = 'https://www.reddit.com/r/csci040temp/comments/jhb20w/2020_debate_thread/'
+        submission = reddit.submission(url=reddit_debate_url)
+        print(submission.title)
+    else:
+        print('new thread')
+        submission_2 = reddit.subreddit("csci040temp").random()
+        print(submission_2.title)
+        submission = submission_2
+
+#extracredit
 
 
 
